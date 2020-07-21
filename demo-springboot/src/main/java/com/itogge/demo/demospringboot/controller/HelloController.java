@@ -10,9 +10,14 @@ import com.itogge.demo.demospringboot.common.Resource;
 
 @RestController
 public class HelloController {
-	
+
 	@Autowired
 	private Resource resource;
+
+	@RequestMapping("/hello")
+	public String hello() {
+		return "Hello world!";
+	}
 	
 	@RequestMapping("/getResource")
 	public DataResult getResource() {
@@ -21,10 +26,4 @@ public class HelloController {
 		return DataResult.ok(bean);
 	}
 
-	@RequestMapping("/hello")
-	public String hello() {
-		return "Hello world!";
-	}
-	
-	
 }

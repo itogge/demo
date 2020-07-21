@@ -3,6 +3,7 @@ package com.itogge.demo.demospringboot.common;
 public class DataResult {
 	
 	private final static String RESULT_CODE_SUCCESS = "0000";
+	private final static String RESULT_CODE_EXCEPTION = "9999";
 
 	private String resultCode;
 	
@@ -20,14 +21,27 @@ public class DataResult {
 		return new DataResult(resultCode, resultMessage, data);
 	}
 	
+	
 	public static DataResult ok() {
-		return new DataResult(DataResult.RESULT_CODE_SUCCESS, null, null);
+		return DataResult.build(DataResult.RESULT_CODE_SUCCESS, null, null);
 	}
 	
 	public static DataResult ok(Object data) {
-		return new DataResult(DataResult.RESULT_CODE_SUCCESS, null, data);
+		return DataResult.build(DataResult.RESULT_CODE_SUCCESS, null, data);
 	}
-
+	
+	public static DataResult exception() {
+		return DataResult.build(DataResult.RESULT_CODE_EXCEPTION, null, null);
+	}
+	
+	public static DataResult exception(String exceptionMessage) {
+		return DataResult.build(DataResult.RESULT_CODE_EXCEPTION, exceptionMessage, null);
+	}
+	
+	public static DataResult exception(Object data) {
+		return DataResult.build(DataResult.RESULT_CODE_EXCEPTION, null, data);
+	}
+	
 	public String getResultCode() {
 		return resultCode;
 	}
