@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>html标准源代码-www.divcss5.com</title>
+		<meta name="keywords" content="关键字" />
+	</head>
+	
+	<body style="padding-left:50px;">
+		
+		<h2>1、基本取值</h2>
+		<div class = "demo_div">
+			<ul>
+				<li>整数：<font color="red">${intVar}</font><br/></li>
+				<li>长整数：<font color="red">${longVar}</font><br/></li>
+				<li>字符串：<font color="red">${stringVar}</font><br/></li>
+				<li>双精度：<font color="red">${doubleVar}</font><br/></li>
+				<li>日期：<font color="red">${dateVar?string('yyyy-MM-dd HH:mm:ss')}</font><br/></li>
+				<li>null：<font color="red">${nullVar!'我是默认值'}</font><br/></li>
+				<li>booleanVar：<font color="red">${booleanVar}</font><br/></li>
+				<li>missing：<font color="red">${sssVar!}</font><br/></li>
+			</ul>
+		</div>
+		<h2>2、封装类型</h2>
+		<div class = "demo_div">
+			<ul>
+				<li>
+					对象：<font color="red">${userObject.username}</font><br/>
+					对象中的富文本：${(userObject.remark)!?html}
+				</li>
+			</ul>
+		</div>
+		<h2>3、集合List</h2>
+		<div class = "demo_div">
+			<ul>
+				<#if strList??>
+					<#list strList as item>
+						<li><font color="red">${item!}</font></li>
+					</#list>
+				</#if>
+			</ul>
+		</div>
+		<h2>4、集合Map</h2>
+		<div class = "demo_div">
+			<ul>
+				<#list map?keys as key>
+					<li><font color="red">${key}:${map[key]}</font></li>
+				</#list>
+			</ul>
+		</div>
+		<h2>5、if</h2>
+		<div class = "demo_div">
+			<ul>
+				<li>if</li>
+				<#assign var = 100 />
+				
+				<#if var == 99>
+					<font color="red">var = 999</font>
+				</#if>
+				
+				<#if var == 99>
+					<font color="red">var = 99</font>
+				<#else>
+					<font color="red">var != 99</font>
+				</#if>
+				
+				<#if var &gt; 99>
+					<font color="red">var 大于 99</font>
+				<#elseif var == 99>
+					<font color="red">var = 99</font>
+				</#if>
+			</ul>
+		</div>
+		<h2>6、switch</h2>
+		<div class = "demo_div">
+			<ul>
+				<li>switch case break default</li>
+				<#assign var = 10 />
+				
+				<#switch var>
+					<#case 10>
+						10</br>
+					<#break>	
+					<#case 11>
+						11</br>
+					<#default>
+						1223	
+				</#switch>
+			</ul>
+		</div>
+	</body>
+</html>

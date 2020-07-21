@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>html标准源代码-www.divcss5.com</title>
+		<meta name="keywords" content="关键字" />
+	</head>
+	
+	<body style="padding-left:50px;">
+		
+		<h2>1、字符串常用内建函数</h2>
+		<div class = "demo_div">
+			<ul>
+				<#assign a = 'helloworld' />
+				<li>连接</li>
+				<font color="red">${a}</font></br>
+				<li>截取</li>
+				<font color="red">${a?substring(5,8)}</font></br>
+				<li>长度</li>
+				<font color="red">${a?length}</font></br>
+				<li>大写</li>
+				<font color="red">${a?upper_case}</font></br>
+				<li>小写</li>
+				<font color="red">${a?lower_case}</font></br>
+				
+				<li>index_of</li>
+				<font color="red">${a?index_of('w')}</font></br>
+				<li>last_index_of</li>
+				<font color="red">${a?last_index_of('o')}</font></br>
+				<li>replace</li>
+				<font color="red">${a?replace('o','XX')}</font></br>
+				
+				<li>trim</li>
+				<font color="red">${a?trim}</font></br>
+				
+				<li>starts_with</li>
+				<font color="red">${a?starts_with("a")}</font></br>
+				
+				<li>ends_with</li>
+				<font color="red">${a?ends_with("a")}</font></br>
+				
+				
+				<li>cap_first</li>
+				<font color="red">${a?cap_first}</font></br>
+				
+				<li>contains</li>
+				<font color="red">${a?contains("wor")}</font></br>
+				
+				<li>is_string</li>
+				<#assign var44 = 1234>
+				<font color="red">${var44?is_string}</font></br>
+				
+				<li>is_number</li>
+				<#assign var44 = 1234>
+				<font color="red">${var44?is_number}</font></br>
+				
+				<li>is_method</li>
+				<#assign var44 = 1234>
+				<font color="red">${var44?is_method}</font></br>
+				
+				<li>has_content</li>
+				<#assign var44 = 1234>
+				<font color="red">${var44?has_content?string('yes','no')}</font></br>
+				<li>eval</li>
+				<font color="red">${("1"+"2")?eval}</font></br>
+				<font color="red">${("1+2")?eval}</font></br>
+				<font color="red">${("1"+"2")?eval?is_string?string('yes','no')}</font></br>
+				
+				<li>split</li>
+				<#list "a|b|c|d"?split("|") as item>
+					<font color="red">${item}</font>,
+				</#list>
+				<li>date</li>
+				<#assign var1 = "01/03/2020"?date("dd/MM/yyyy")/>
+				<#assign var2 = "15:03:30"?time("HH:mm:ss")/>
+				<#assign var3 = "2020-02-05 17:58:32"?datetime("yyyy-MM-dd HH:mm:ss")/>
+				${var1}</br>
+				${var2}</br>
+				${var3}</br>
+				<li>数字</li>
+				<#assign numVar1 = 3.6415926  />
+				${numVar1?string("0.##")}
+				${numVar1?round}
+				${numVar1?floor}
+				${numVar1?ceiling}
+			</ul>
+		</div>
+		<h2>2、自定义函数</h2>
+		<div class = "demo_div">
+			<ul>
+				<#assign myList = [2,3,4,5,2,8,1,8,9,8,7] />
+				<li>未排序</li>
+				<#list myList as item>
+					<font color="red">${item!}</font>
+				</#list>
+				
+				<li>已排序</li>
+				<#list sort_int(myList) as item>
+					<font color="red">${item!}</font>
+				</#list>
+			</ul>
+		</div>
+		<h2>3、list常用指令</h2>
+		<div class = "demo_div">
+			<ul>
+				<#assign myList = [1,2,3,4,11,12,13,14,21,22,23,24,31,32,33,34] />
+				<li>listsort排序</li>
+				<#list myList?sort as item>
+					${item_index}:<font color="red">${item!}</font>
+				</#list>
+				<li>list:sort?reverse</li>
+				<#list myList?sort?reverse as item>
+					${item_index}:<font color="red">${item!}</font>
+				</#list>
+				<li>list:size</li>
+					<font color="red">${myList?size!}</font>
+				<li>list:下标取值</li>
+					<font color="red">${myList[3]}</font>
+				<li>list:first</li>
+					<font color="red">${myList?first}</font>
+				<li>list:last</li>
+					<font color="red">${myList?last}</font>
+				<li>list:seq_contains</li>
+					<font color="red">${myList?seq_contains("12")}</font>
+				<li>list:seq_index_of</li>
+					<font color="red">${myList?seq_index_of("12")}</font>
+				<li>list:size</li>
+					<font color="red">${myList?size}</font>	
+				<li>list:chunk</li>
+				${myList?chunk(4)?size}</br>
+				<#list myList?chunk(4)?last as item>
+					${item}
+				</#list>
+			</ul>
+		</div>
+		<h2>4、用户123456是否拥有admin角色，并且返回admin权限</h2>
+		<div class = "demo_div">
+			<ul>
+				<@role user='123456' role='admin' ;result1,result2>
+					<#if result1>
+						我的角色是<font color="red">admin</font></br>
+					</#if>
+						我拥有的权限是：<font color="red">
+						<#list result2 as item>
+							${item},
+						</#list>
+						</font>
+				</@role>
+			</ul>
+		</div>
+		<h2>5、macro：宏指令</h2>
+		<div class = "demo_div">
+			<ul>
+				<li>无参数的macro指令</li>
+				<div class = "">
+					<#macro test>
+						<font color="red">我是一个无参数的宏指令test</font></br>
+					</#macro>
+					
+					<@test/>
+				</div>
+				<li>有参数的macro指令</li>
+				<div class = "">
+					<#macro test param1 param2>
+						<font color="red">我是一个有参数的宏指令test，param1=${param1},param2=${param2}</font></br>
+					</#macro>
+					
+					<@test param1="java" param2="python" />
+				</div>
+				
+				<li>有参数默认值的macro指令</li>
+				<div class = "">
+					<#macro test param1 param2="PHP">
+						<font color="red">我是一个有参数的宏指令test，param1=${param1},param2=${param2}</font></br>
+					</#macro>
+					
+					<@test param1="java" />
+				</div>
+				
+				<li>多个参数的macro指令</li>
+				<div class = "">
+					<#macro test param1 param2 paramExt...>
+						<font color="red">我是一个有参数的宏指令test，param1=${param1},param2=${param2}</font></br>
+						<font color="red">${paramExt['param3']}</font></br>
+						<font color="red">${paramExt['param4']}</font></br>
+						<font color="red">${paramExt['param5']}</font></br>
+					</#macro>
+					
+					<@test param1="java" param2="Python" param3="PHP" param4="C" param5="C++" />
+				</div>
+			</ul>
+		</div>
+		<h2>5、nested</h2>
+		<div class = "demo_div">
+			<ul>
+				<li>定义</li>
+				<div class = "">
+					<#macro test param1>
+						${param1}</br>
+						<#nested param1,"我的nested参数"></br>
+					</#macro>
+				</div>
+				
+				<li>调用</li>
+				<div class = "">
+					<@test param1="java";loopVar1 , loopVar2>
+						<font color="red">hello ${loopVar1} ,${loopVar2}</br></font>
+					</@test>
+					
+					<@test param1="python";loopVar1>
+						hello ${loopVar1}</br>
+					</@test>
+				</div>
+			</ul>
+		</div>
+		<h2>6、函数</h2>
+		<div class = "demo_div">
+			<ul>
+				<#function doAdd param1 param2>
+					<#return param1 + param2>
+				</#function>
+				<li>调用</li>
+				<div>
+					你好，我是调用${doAdd(100,100)}
+				</div>				
+			</ul>
+		</div>
+	</body>
+</html>
