@@ -11,7 +11,7 @@
 	<url>http://maven.apache.org</url>
 	
 	<properties>
-		<junit.version>4.11</junit.version>
+		<junit.version>4.13.1</junit.version>
 		<spring.version>4.2.5.RELEASE</spring.version>
 		<freemarker.version>2.3.20</freemarker.version>
 		<servlet.version>3.1.0</servlet.version>
